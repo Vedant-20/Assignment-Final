@@ -1,0 +1,9 @@
+.list-view .title {
+    height: 50px;
+    overflow: hidden;
+}
+.list-view .description {
+    height: 75px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

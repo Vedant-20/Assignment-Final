@@ -1,0 +1,70 @@
+<div class="my-container mx-auto border-2 border-pink-600">
+    <div class="p-4 border-2 border-pink-600 rounded-lg">
+        <h3 class="w-1/4 border-2 border-fuchsia-500 text-center text-fuchsia-500 py-2 rounded-lg">Current Cart</h3>
+        <div class="m-5">
+            <div class="grid w-1/2 mx-auto mb-3">
+                <button type="button" class="rounded-md border-2 border-lime-400 px-3 py-2 text-sm font-semibold text-lime-400 shadow-sm hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:text-white hover:border-2 hover:border-lime-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" routerLink="/orders">Order</button>
+            </div>
+            <table class="my-shadow mx-auto w-1/2  min-w-full bg-white/25 border border-indigo-600 hover:border-violet-400">
+                <tbody >
+                    <tr>
+                        <td class="text-cyan-400 ">Total Items</td>
+                        <td class="font-bold text-fuchsia-500">{{usersCart.cartItems.length}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-cyan-400">Total Price</td>
+                        <td class="font-bold text-red-500">{{usersPaymentInfo.totalAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-cyan-400">Shipping Charges</td>
+                        <td class="font-bold text-red-500">{{usersPaymentInfo.shipingCharges}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-cyan-400">Discount</td>
+                        <td class="font-bold text-lime-400">{{usersPaymentInfo.amountReduced}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-cyan-400">You Have To Pay</td>
+                        <td class="font-bold text-lime-400">{{usersPaymentInfo.amountPaid}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+        <div class="current-cart-items w-3/4 mx-auto mt-5">
+            <h4 class="text-fuchsia-500 font-bold">Cart Items</h4>
+            <div class="flex flex-wrap -m-0 mt-4">
+                <div class="w-1/2 py-3 px-2 " *ngFor="let cartItem of usersCart.cartItems">
+                    <app-product [view]="'currcartitem'" [product]="cartItem.product"></app-product>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mt-5 p-4 border-2 border-yellow-400 rounded-lg">
+        <h3 class="w-1/4 border-2 border-yellow-400 text-center py-2 mb-5 rounded-lg text-yellow-400">Previous Carts</h3>
+        <div class="bg-gradient-to-r from-purple-300 to-indigo-300 border-2 border-transparent shadow-md p-4 rounded-lg mb-5" *ngFor="let cart of usersPreviousCarts">
+            <div class="text-lg font-bold flex justify-between items-center">
+                <span class="time">Ordered On : <span>{{cart.orderedOn | date:"dd-MM-YYYY"}}</span></span>
+                <span class="count">Items: {{cart.cartItems.length}}</span>
+                <span class="price">Price Paid : <span>{{utilityService.calculatePricePaid(cart)}}</span></span>
+
+            </div>
+
+            <div class="cart-body px-4 py-2">
+                <div class="flex flex-wrap -m-0">
+                    <div class="w-1/6 px-2 py-2 " *ngFor="let cartItem of cart.cartItems">
+                        <app-product [view]="'prevcartitem'" [product]="cartItem.product"></app-product>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

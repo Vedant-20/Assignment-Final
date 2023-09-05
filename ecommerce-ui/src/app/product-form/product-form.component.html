@@ -1,0 +1,27 @@
+<div class="popup-overlay" *ngIf="isFormOpen">
+    <div class="popup-container">
+      <button class="close-button" (click)="closeForm()">Close</button>
+      <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+        
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" [(ngModel)]="product.id" required>
+
+        <input type="text" id="title" name="title" required> 
+
+        <input type="text" id="description" name="description" required>
+
+        <input type="text" id="link" name="link" required>
+
+        <input type="text" name="category" id="category" required>
+
+        <input type="text" name="subcategory" id="subcategory" required>
+
+        <input type="number" id="price" name="price">
+  
+        
+  
+        <button type="submit">Add Product</button>
+      </form>
+    </div>
+  </div>
+  

@@ -1,0 +1,45 @@
+<div class="my-container mx-auto border border-black">
+    <!-- Toolbar -->
+    <div class="border-2 border-blue-700 rounded-lg mb-5 p-3 flex justify-around">
+        <div class="flex space-x-2" role="group" aria-label="Button Group">
+            <button type="button" class="rounded-md border border-yellow-600 px-3 py-2 text-sm font-semibold text-yellow-600 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 active:bg-yellow-600 active:text-white" [ngClass]="{'active':view==='grid'}" (click)="view='grid'">Grid</button>
+            
+        </div>
+
+        <div class="w-[50] flex">
+            <span class="me-5 flex items-center text-l text-white font-bold">Sort By</span>
+            <div class="flex space-x-2" role="group">
+                <button type="button" class="rounded-md border border-yellow-600 px-3 py-2 text-sm font-semibold text-yellow-600 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 active:bg-yellow-600 active:text-white" [ngClass]="{'active':sortby==='default'}" (click)="sortby='default';sortByPrice(sortby)">Default</button>
+                <button type="button" class="rounded-md border border-yellow-600 px-3 py-2 text-sm font-semibold text-yellow-600 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 active:bg-yellow-600 active:text-white" [ngClass]="{'active':sortby==='htl'}" (click)="sortby='htl';sortByPrice(sortby)">Price (High to Low)</button>
+                <button type="button" class="rounded-md border border-yellow-600 px-3 py-2 text-sm font-semibold text-yellow-600 shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-600 active:bg-yellow-600 active:text-white" [ngClass]="{'active':sortby==='lth'}" (click)="sortby='lth';sortByPrice(sortby)">Price (Low to High)</button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="border-2 border-blue-700  p-5">
+        <!-- Grid View -->
+        <div class="grid " *ngIf="view==='grid'">
+            <div class="flex flex-wrap gap-5">
+                <div class="w-1/4" *ngFor="let product of products" >
+                    <app-product [product]="product"></app-product>
+                </div>
+
+            </div>
+        </div>
+            
+
+        <!-- List View -->
+        <div class="divide-y " *ngIf="view==='list'">
+            <div class="flex flex-wrap mb-5">
+                <div class="w-full" *ngFor="let product of products" >
+                    <app-product [view]="'list'" [product]="product"></app-product>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

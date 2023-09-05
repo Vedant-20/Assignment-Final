@@ -1,0 +1,103 @@
+<div class="my-container mx-auto">
+    <section class="m-3 p-4 border-2 border-blue-700 rounded-lg">
+        <h4 class="w-1/4 border-2 border-blue-700 text-blue-700 text-center py-2 rounded-lg">Payment Info</h4>
+        <table class="my-shadow mx-auto mt-2 w-1/2  min-w-full bg-white/25 border border-indigo-600 hover:border-violet-400">
+            <tbody >
+                <tr>
+                    <td class="text-cyan-400 ">Total Items</td>
+                    <td class="font-bold text-fuchsia-500">{{usersCart.cartItems.length}}</td>
+                </tr>
+                <tr>
+                    <td class="text-cyan-400">Total Price</td>
+                    <td class="font-bold text-red-500">{{usersPaymentInfo.totalAmount}}</td>
+                </tr>
+                <tr>
+                    <td class="text-cyan-400">Shipping Charges</td>
+                    <td class="font-bold text-red-500">{{usersPaymentInfo.shipingCharges}}</td>
+                </tr>
+                <tr>
+                    <td class="text-cyan-400">Discount</td>
+                    <td class="font-bold text-lime-400">{{usersPaymentInfo.amountReduced}}</td>
+                </tr>
+                <tr>
+                    <td class="text-cyan-400">You Have To Pay</td>
+                    <td class="font-bold text-lime-400">{{usersPaymentInfo.amountPaid}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <section class="m-3 p-4 border-2 border-yellow-400 rounded-lg">
+        <h4 class="w-1/4 border-2 border-yellow-400 text-center text-yellow-400 py-2 rounded-lg">Payment Method</h4>
+        <div class="flex justify-center items-center">
+            <h5 class="me-4 text-yellow-400">Select Any Method</h5>
+            <select class="w-1/4 block px-4 py-2 mt-1 text-yellow-400 border-2 rounded-lg bg-white/25 border-yellow-400 hover:text-indigo-500 hover:border-2 hover:border-indigo-500 focus:outline-none focus:border-blue-500" [formControl]="selectedPaymentMethod">
+                <option value="0">Open this select menu</option>
+                <option *ngFor="let paymentMethod of paymentMethods" value="{{paymentMethod.id}}">
+                    {{paymentMethod.type}}
+                    <span *ngIf="paymentMethod.provider !== ''">{{" - "+paymentMethod.provider}}</span>
+                </option>
+            </select>
+
+        </div>
+
+    </section>
+
+    <section class="m-3 p-4 border-2 border-yellow-400 rounded-lg">
+        <h4 class="w-1/4 border-2 border-blue-700 text-yellow-400 text-center py-2 rounded-lg">Proceed to Payments</h4>
+        <div class="mt-4 w-1/2 " *ngIf="selectedPaymentMethodName !== '' ">
+            <table class="my-shadow mx-auto mt-2 w-1/2  min-w-full bg-white/25 border border-indigo-600 hover:border-violet-400">
+                <thead>
+                    <tr>
+                        <td class="text-cyan-400">You Have To Pay</td>
+                        <td class="text-lime-400">{{usersPaymentInfo.amountPaid}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-cyan-400">Payment Method</td>
+                        <td class="text-lime-400">{{this.getPaymentMethod(selectedPaymentMethodName)}}</td>
+                    </tr>
+                    <tr>
+                        <td class="text-cyan-400">Address</td>
+                        <td *ngIf="true" class="text-lime-400">{{address}} </td>
+                        <td *ngIf="!true" class="text-red-500">
+                            You have not entered address 
+                            <a routerLink="/account-settings">Please Enter address</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-cyan-400">Mobile Number</td>
+                        <td *ngIf="true" class="text-lime-400">1234567890 <a routerLink="/account-settings"></a> </td>
+                        <td *ngIf="!true" class="text-rose-500">
+                            You have not enterd mobile Number
+
+                            <a routerLink="/account-settings">Please Enter Mobile Number</a>
+
+                        </td>
+                    </tr>
+
+                </thead>
+            </table>
+
+            <div class="grid w-1/2 mt-2">
+                <button type="button" class="rounded-md border-2 border-lime-400 px-3 py-2 text-sm font-semibold text-lime-400 shadow-sm hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% hover:text-white hover:border-2 hover:border-lime-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600" (click)="placeOrder()">Pay Now</button>
+            </div>
+
+            <div class="processing">
+                <div class="w-16 h-16 me-4 border-t-8 border-blue-700 border-solid rounded-full animate-spin" role="status" *ngIf="displaySpinner">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                  <h6 class="m-0 text-rose-500">{{message}}</h6>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div *ngIf="!false" class="pt-4">
+        <h2 class="text-rose-600">You Have Not Logged In</h2>
+    </div>
+
+</div>
